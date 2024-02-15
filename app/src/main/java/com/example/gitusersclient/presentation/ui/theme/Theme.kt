@@ -1,4 +1,4 @@
-package com.example.gitusersclient.ui.theme
+package com.example.gitusersclient.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
