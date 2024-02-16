@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Git Users client"
 include(":app")
- 
+include(":design-system")
+include(":data-network")
+include(":core")

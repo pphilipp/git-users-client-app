@@ -9,10 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.design_system.theme.GitUsersClientTheme
 import com.example.gitusersclient.presentation.navigation.RootGraph
 import com.example.gitusersclient.presentation.navigation.Screen
+import com.example.gitusersclient.presentation.navigation.usersDetailsScreenRoute
 import com.example.gitusersclient.presentation.navigation.usersListScreenRoute
-import com.example.gitusersclient.presentation.ui.theme.GitUsersClientTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity() {
             startDestination = startMainDestination.route
         ) {
             usersListScreenRoute(navigationController)
+            usersDetailsScreenRoute(navigationController)
         }
     }
 }

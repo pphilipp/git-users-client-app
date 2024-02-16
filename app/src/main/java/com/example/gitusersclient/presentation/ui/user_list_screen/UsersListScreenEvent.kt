@@ -1,6 +1,6 @@
 package com.example.gitusersclient.presentation.ui.user_list_screen
 
-import com.example.gitusersclient.core.abstraction.presentation.base.ViewEvent
+import com.example.core.abstraction.presentation.base.ViewEvent
 
 sealed class UsersListScreenEvent : ViewEvent {
     data object InitializeEvent : UsersListScreenEvent()

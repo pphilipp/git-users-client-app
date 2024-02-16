@@ -1,6 +1,7 @@
 package com.example.gitusersclient
 
 import android.app.Application
+import com.example.data_network.di.networkModule
 import com.example.gitusersclient.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,7 +20,7 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(
-                appModule
+                appModule + networkModule
             )
         }
     }
