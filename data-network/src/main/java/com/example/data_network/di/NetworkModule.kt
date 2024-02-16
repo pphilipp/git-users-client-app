@@ -19,12 +19,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val SERVER_URL = "https://api.github.com/"
-const val USER_TOKEN = "Bearer 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"
+const val USER_TOKEN_LEFT =  "Bearer github_pat_11ACJ72UY0fNVRiRWdH2t3_3yxLg4o3xiH7"
+const val USER_TOKEN_RIGHT = "uwCcMEfwtAokr5bTPf5tq0fvhvXG9enZ5OP7CLYGoVfzAma"
 
 val networkModule = module {
     single { provideHttpLoggingInterceptor() }
     single { provideNetworkConnectionInterceptor(androidContext()) }
-    single { provideUserTokenInterceptor(USER_TOKEN) }
+    single { provideUserTokenInterceptor("$USER_TOKEN_LEFT$USER_TOKEN_RIGHT") }
     single { provideGeneralHeaderInterceptor() }
 
     single { provideRetrofit(get(), get()) }

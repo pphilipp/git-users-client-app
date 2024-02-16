@@ -23,5 +23,4 @@ data object RootGraph : Graph(graph = ROOT_GRAPH) {
                 "${route_host}/{${argument_key_user_login}}"
         }
     }
-
 }
