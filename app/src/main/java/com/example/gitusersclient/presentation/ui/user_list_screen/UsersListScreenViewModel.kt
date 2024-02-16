@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.abstraction.data.IRepository
 import com.example.core.abstraction.presentation.base.BaseViewModel
 import com.example.core.common.DataResult
-import com.example.gitusersclient.domain.model.UserBusinessModel
+import com.example.gitusersclient.domain.model.UserBM
 import kotlinx.coroutines.launch
 
 class UsersListScreenViewModel(
@@ -30,7 +30,7 @@ class UsersListScreenViewModel(
 
             when (val data = repository.getUsersList(pageNumber)) {
                 is DataResult.Error -> {
-
+                    // show error state
                 }
 
                 is DataResult.Success -> {
@@ -40,11 +40,11 @@ class UsersListScreenViewModel(
                         copy(
                             usersList = data.data.map { userBM ->
                                 UserListItemUiModel(
-                                    id = (userBM as UserBusinessModel).id,
+                                    id = (userBM as UserBM).id,
                                     login = userBM.login,
                                 )
                             },
-                            lastUserId = (data.data.last() as UserBusinessModel).id
+                            lastUserId = (data.data.last() as UserBM).id
                         )
                     }
                 }

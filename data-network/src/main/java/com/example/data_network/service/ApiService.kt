@@ -1,7 +1,7 @@
 package com.example.data_network.service
 
-import com.example.data_network.model.responce.UserDetailsRemoteModel
-import com.example.data_network.model.responce.UserRemoteModel
+import com.example.data_network.model.responce.UserDetailsRM
+import com.example.data_network.model.responce.UserRM
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,10 +13,10 @@ interface ApiService {
     suspend fun fetchUsersList(
         @Query("since") pageNumber: Int = 1,
         @Query("per_page") perPageAmount: Int = 10,
-    ): Response<List<UserRemoteModel>>
+    ): Response<List<UserRM>>
 
     @GET("users/{userLogin}")
     suspend fun fetchUserDetails(
         @Path("userLogin") userLogin: String
-    ): Response<UserDetailsRemoteModel>
+    ): Response<UserDetailsRM>
 }

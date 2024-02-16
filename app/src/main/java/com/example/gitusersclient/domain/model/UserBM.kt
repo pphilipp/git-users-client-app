@@ -2,7 +2,7 @@ package com.example.gitusersclient.domain.model
 
 import com.example.core.abstraction.domain.IBusinessModel
 
-data class UserBusinessModel(
+data class UserBM(
     val id: Int,
     val nodeId: String,
     val type: String,
