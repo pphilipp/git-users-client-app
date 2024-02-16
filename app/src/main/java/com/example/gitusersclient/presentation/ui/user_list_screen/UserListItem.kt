@@ -16,18 +16,18 @@ import java.util.UUID
 fun UserListItem(
     modifier: Modifier = Modifier,
     userListItemUiModel: UserListItemUiModel,
-    onUserItemClicked: (Int) -> Unit
+    onUserItemClicked: (String) -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                onUserItemClicked(userListItemUiModel.id)
+                onUserItemClicked(userListItemUiModel.login)
             }
     ) {
         Text(
             modifier = Modifier.padding(top = X_SMALL_SPACE),
-            text = userListItemUiModel.name,
+            text = userListItemUiModel.login,
             style = MaterialTheme.typography.bodyLarge
         )
     }
@@ -39,7 +39,7 @@ fun UserListItemPreview() {
     UserListItem(
         userListItemUiModel = UserListItemUiModel(
             id = UUID.randomUUID().variant(),
-            name = "@Philippoid"
+            login = "@Philippoid"
         ),
         onUserItemClicked = { }
     )

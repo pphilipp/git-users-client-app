@@ -9,8 +9,12 @@ class UserDetailsScreenViewModel(
 
     override fun handleEvent(event: UserDetailsScreenEvent) {
         when (event) {
-            UserDetailsScreenEvent.InitializeEvent -> {
-
+            is UserDetailsScreenEvent.InitializeEvent -> {
+                setState {
+                    copy(
+                        userName = event.userLogin
+                    )
+                }
             }
         }
     }

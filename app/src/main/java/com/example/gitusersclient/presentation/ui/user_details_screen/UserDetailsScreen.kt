@@ -12,6 +12,7 @@ fun UserDetailsScreen(
 ) {
     Column {
         Text(text = "Details")
+        Text(text = viewState.userName)
     }
 
 }

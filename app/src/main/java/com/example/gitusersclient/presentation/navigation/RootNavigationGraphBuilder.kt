@@ -5,7 +5,9 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.gitusersclient.presentation.ui.user_details_screen.UserDetailsScreen
 import com.example.gitusersclient.presentation.ui.user_details_screen.UserDetailsScreenEvent
 import com.example.gitusersclient.presentation.ui.user_details_screen.UserDetailsScreenViewModel
@@ -21,7 +23,7 @@ fun NavGraphBuilder.usersListScreenRoute(
         val viewModel: UsersListScreenViewModel = getViewModel()
         val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-        LaunchedEffect(key1= true) {
+        LaunchedEffect(key1 = true) {
             viewModel.handleEvent(UsersListScreenEvent.InitializeEvent)
         }
 
@@ -30,8 +32,8 @@ fun NavGraphBuilder.usersListScreenRoute(
             onPullDownToRefreshClicked = {
 
             },
-            onUserListItemClicked = {
-                navController.navigate(RootGraph.UserDetails.route)
+            onUserListItemClicked = { userLogin ->
+                navController.navigate(RootGraph.UserDetails(userLogin).route)
             }
         )
     }
@@ -40,12 +42,25 @@ fun NavGraphBuilder.usersListScreenRoute(
 fun NavGraphBuilder.usersDetailsScreenRoute(
     navController: NavController
 ) {
-    composable(route = RootGraph.UserDetails.route) {
+    composable(
+        route = RootGraph.UserDetails.route_with_args,
+        arguments = listOf(
+            navArgument(name = RootGraph.UserDetails.argument_key_user_login) {
+                type = NavType.StringType
+            },
+        )
+    ) { navBackStackEntry ->
         val viewModel: UserDetailsScreenViewModel = getViewModel()
         val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-        LaunchedEffect(key1= true) {
-            viewModel.handleEvent(UserDetailsScreenEvent.InitializeEvent)
+        val userLoginArg = navBackStackEntry.arguments?.getString(
+            RootGraph.UserDetails.argument_key_user_login
+        )
+
+        LaunchedEffect(key1 = true) {
+            userLoginArg?.let {
+                viewModel.handleEvent(UserDetailsScreenEvent.InitializeEvent(userLoginArg))
+            }
         }
 
         UserDetailsScreen(

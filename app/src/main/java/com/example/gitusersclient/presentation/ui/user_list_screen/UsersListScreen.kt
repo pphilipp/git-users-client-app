@@ -22,7 +22,7 @@ fun UsersListScreen(
     modifier: Modifier = Modifier,
     viewState: UsersListViewState,
     onPullDownToRefreshClicked: () -> Unit,
-    onUserListItemClicked: (userId: Int) -> Unit,
+    onUserListItemClicked: (userLogin: String) -> Unit,
 ) {
 
     Scaffold(
@@ -51,7 +51,7 @@ fun UsersListScreen(
 fun UsersListContent(
     modifier: Modifier,
     listOfUsers: List<UserListItemUiModel>?,
-    onUserListItemClicked: (userId: Int) -> Unit,
+    onUserListItemClicked: (userLogin: String) -> Unit,
 ) {
     listOfUsers?.let {
         if (listOfUsers.isEmpty()) {
@@ -93,11 +93,11 @@ fun UsersListScreenPreview() {
             usersList = listOf(
                 UserListItemUiModel(
                     id = UUID.randomUUID().variant(),
-                    name = "user first"
+                    login = "user first"
                 ),
                 UserListItemUiModel(
                     id = UUID.randomUUID().variant(),
-                    name = "user second"
+                    login = "user second"
                 )
             )
         ),

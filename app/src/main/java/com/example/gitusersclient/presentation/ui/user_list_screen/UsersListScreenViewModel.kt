@@ -41,7 +41,7 @@ class UsersListScreenViewModel(
                             usersList = data.data.map { userBM ->
                                 UserListItemUiModel(
                                     id = (userBM as UserBusinessModel).id,
-                                    name = userBM.login,
+                                    login = userBM.login,
                                 )
                             },
                             lastUserId = (data.data.last() as UserBusinessModel).id
