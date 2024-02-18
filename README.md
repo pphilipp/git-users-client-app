@@ -1,8 +1,8 @@
 # git-users-client-app
 Master-details Demo app based on git API.
 
-![Screenshot_20240218_183928.png](readmeRes%2FScreenshot_20240218_183928.png=250x)![Screenshot_20240218_184100.png](readmeRes%2FScreenshot_20240218_184100.png=250x)
-![Screenshot_20240218_185718.png](readmeRes%2FScreenshot_20240218_185718.png=250x)![Screenshot_20240218_185748.png](readmeRes%2FScreenshot_20240218_185748.png=250x)
+![Screenshot_20240218_183928.png](readmeRes%2FScreenshot_20240218_183928.png){width="300px"}![Screenshot_20240218_184100.png](readmeRes%2FScreenshot_20240218_184100.png){width="300px"}
+![Screenshot_20240218_185718.png](readmeRes%2FScreenshot_20240218_185718.png){width="300px"}![Screenshot_20240218_185748.png](readmeRes%2FScreenshot_20240218_185748.png){width="300px"}
 
 # Architectural aspects :
 - Single Activity,
