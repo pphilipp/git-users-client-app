@@ -1,5 +1,6 @@
 package com.example.gitusersclient.presentation.ui.user_details_screen
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,7 @@ fun UserDetailsScreen(
         modifier = modifier,
         topBar = {
             AppToolBar(
-                useDarkTheme = true,
+                useDarkTheme = isSystemInDarkTheme(),
                 toolBarUiModel = AppToolBarUiModel(
                     title = viewState.userDetailsUiModel.login
                 ),

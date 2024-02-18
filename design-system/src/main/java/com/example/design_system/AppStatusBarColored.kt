@@ -11,7 +11,7 @@ import androidx.core.view.WindowCompat
 @Composable
 fun AppStatusBarColored(
     useDarkTheme: Boolean,
-    color: Color = Color.Magenta
+    color: Color = Color.Gray
 ) {
     val view = LocalView.current
     val context = view.context

@@ -1,6 +1,7 @@
 package com.example.gitusersclient.presentation.ui.user_list_screen
 
 import android.widget.Toast
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,7 @@ fun UsersListScreen(
         modifier = modifier,
         topBar = {
             AppToolBar(
-                useDarkTheme = true,
+                useDarkTheme = isSystemInDarkTheme(),
                 toolBarUiModel = AppToolBarUiModel(
                     title = "Git-Users client"
                 )
