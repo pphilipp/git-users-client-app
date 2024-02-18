@@ -2,19 +2,25 @@ package com.example.gitusersclient.presentation.ui.user_list_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.design_system.AppToolBar
 import com.example.design_system.AppToolBarUiModel
 import com.example.design_system.FullScreenProgressView
+import com.example.design_system.theme.X_SMALL_SPACE
 import java.util.UUID
 
 @Composable
@@ -22,6 +28,7 @@ fun UsersListScreen(
     modifier: Modifier = Modifier,
     viewState: UsersListViewState,
     onPullDownToRefreshClicked: () -> Unit,
+    onLastItemListScrolled: () -> Unit,
     onUserListItemClicked: (userLogin: String) -> Unit,
 ) {
 
@@ -39,7 +46,8 @@ fun UsersListScreen(
             UsersListContent(
                 modifier = modifier.padding(it),
                 listOfUsers = viewState.usersList,
-                onUserListItemClicked = onUserListItemClicked
+                onUserListItemClicked = onUserListItemClicked,
+                onLastItemListScrolled = onLastItemListScrolled
             )
         }
     )
@@ -52,6 +60,7 @@ fun UsersListContent(
     modifier: Modifier,
     listOfUsers: List<UserListItemUiModel>?,
     onUserListItemClicked: (userLogin: String) -> Unit,
+    onLastItemListScrolled: () -> Unit,
 ) {
     listOfUsers?.let {
         if (listOfUsers.isEmpty()) {
@@ -60,11 +69,29 @@ fun UsersListContent(
             LazyColumn(
                 modifier = modifier
             ) {
-                items(listOfUsers) { userItem ->
-                    UserListItem(
-                        userListItemUiModel = userItem,
-                        onUserItemClicked = onUserListItemClicked
-                    )
+                items(
+                    count = listOfUsers.size,
+                    key = { listOfUsers[it].id },
+                    itemContent = { userItemIndex ->
+                        UserListItem(
+                            userListItemUiModel = listOfUsers[userItemIndex],
+                            onUserItemClicked = onUserListItemClicked
+                        )
+                        if (userItemIndex >= listOfUsers.lastIndex) {
+                            onLastItemListScrolled.invoke()
+                        }
+                    })
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = X_SMALL_SPACE),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(40.dp),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
                 }
             }
         }
@@ -106,7 +133,8 @@ fun UsersListScreenPreview() {
             )
         ),
         onUserListItemClicked = { },
-        onPullDownToRefreshClicked = {}
+        onPullDownToRefreshClicked = {},
+        onLastItemListScrolled = {}
 
     )
 }
@@ -120,7 +148,8 @@ fun EmptyUsersListScreenPreview() {
             usersList = emptyList()
         ),
         onUserListItemClicked = { },
-        onPullDownToRefreshClicked = {}
+        onPullDownToRefreshClicked = {},
+                onLastItemListScrolled = {}
 
     )
 }

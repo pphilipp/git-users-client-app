@@ -13,7 +13,7 @@ class ApiDataSourceImpl(
     override suspend fun fetchUsersList(
         pageNumber: Int
     ): DataResult<List<UserRM>> = try {
-        val response = apiService.fetchUsersList()
+        val response = apiService.fetchUsersList(pageNumber)
 
         if (response.isSuccessful) {
             response.body()?.let {

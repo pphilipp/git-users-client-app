@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +28,7 @@ import com.example.design_system.AppToolBar
 import com.example.design_system.AppToolBarUiModel
 import com.example.design_system.FullScreenProgressView
 import com.example.design_system.theme.X_LARGE_SPACE
+import com.example.gitusersclient.R
 
 @Composable
 fun UserDetailsScreen(
@@ -84,6 +87,7 @@ fun UserDetailsContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(X_LARGE_SPACE),
+            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = Bold,
                 fontSize = 24.sp
@@ -112,6 +116,14 @@ fun UserDetailsContent(
                 modifier = Modifier
                     .padding(X_LARGE_SPACE),
             ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = X_LARGE_SPACE)
+                        .padding(top = X_LARGE_SPACE),
+                    style = MaterialTheme.typography.titleMedium,
+                    text = stringResource(R.string.user_details__title_bio)
+                )
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()

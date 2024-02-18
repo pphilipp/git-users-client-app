@@ -29,9 +29,10 @@ fun NavGraphBuilder.usersListScreenRoute(
 
         UsersListScreen(
             viewState = viewState,
-            onPullDownToRefreshClicked = {
-
+            onLastItemListScrolled = {
+                viewModel.handleEvent(UsersListScreenEvent.LastItemListScrolledEvent)
             },
+            onPullDownToRefreshClicked ={},
             onUserListItemClicked = { userLogin ->
                 navController.navigate(RootGraph.UserDetails(userLogin).route)
             }

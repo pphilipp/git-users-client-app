@@ -11,8 +11,8 @@ interface ApiService {
 
     @GET("users")
     suspend fun fetchUsersList(
-        @Query("since") pageNumber: Int = 1,
-        @Query("per_page") perPageAmount: Int = 10,
+        @Query("since") pageNumber: Int = 0,
+        @Query("per_page") perPageAmount: Int = 30,
     ): Response<List<UserRM>>
 
     @GET("users/{userLogin}")

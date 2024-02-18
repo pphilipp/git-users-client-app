@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Git Users client</string>
+    <string name="user_details__title_bio">Bio:</string>
 </resources>
