@@ -17,24 +17,25 @@ import com.example.gitusersclient.presentation.ui.user_list_screen.UsersListScre
 import org.koin.androidx.compose.getViewModel
 
 fun NavGraphBuilder.usersListScreenRoute(
-    navController: NavController
+    navController: NavController,
+    viewModel: UsersListScreenViewModel
 ) {
     composable(route = RootGraph.UsersList.route) {
-        val viewModel: UsersListScreenViewModel = getViewModel()
         val viewState by viewModel.viewState.collectAsStateWithLifecycle()
-
-        LaunchedEffect(key1 = true) {
-            viewModel.handleEvent(UsersListScreenEvent.InitializeEvent)
-        }
 
         UsersListScreen(
             viewState = viewState,
             onLastItemListScrolled = {
                 viewModel.handleEvent(UsersListScreenEvent.LastItemListScrolledEvent)
             },
-            onPullDownToRefreshClicked ={},
             onUserListItemClicked = { userLogin ->
                 navController.navigate(RootGraph.UserDetails(userLogin).route)
+            },
+            onConfirm = {
+                viewModel.handleEvent(UsersListScreenEvent.AlertDialogEvent.ConfirmEvent)
+            },
+            onDismiss = {
+                viewModel.handleEvent(UsersListScreenEvent.AlertDialogEvent.DismissEvent)
             }
         )
     }

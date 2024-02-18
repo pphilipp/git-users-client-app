@@ -14,7 +14,9 @@ import com.example.gitusersclient.presentation.navigation.RootGraph
 import com.example.gitusersclient.presentation.navigation.Screen
 import com.example.gitusersclient.presentation.navigation.usersDetailsScreenRoute
 import com.example.gitusersclient.presentation.navigation.usersListScreenRoute
+import com.example.gitusersclient.presentation.ui.user_list_screen.UsersListScreenViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
@@ -40,12 +42,14 @@ class MainActivity : ComponentActivity() {
         navigationController: NavHostController,
         startMainDestination: Screen
     ) {
+        val viewModelUsersListScreen: UsersListScreenViewModel = getViewModel()
+
         NavHost(
             navController = navigationController,
             route = RootGraph.graph,
             startDestination = startMainDestination.route
         ) {
-            usersListScreenRoute(navigationController)
+            usersListScreenRoute(navigationController, viewModelUsersListScreen)
             usersDetailsScreenRoute(navigationController)
         }
     }

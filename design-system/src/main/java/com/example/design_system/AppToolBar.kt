@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 
 data class AppToolBarUiModel(
     val title: String = "",
-    val toolbarColor: Color = Color.Gray
+    val toolbarColor: Color = Color.LightGray
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

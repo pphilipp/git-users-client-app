@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alert_dialog_btn_text_ok">OK</string>
+    <string name="alert_dialog_btn_text_cancel">Cancel</string>
+    <string name="alert_dialog_title_text_something_went_wrong">Something went wrong!</string>
+</resources>

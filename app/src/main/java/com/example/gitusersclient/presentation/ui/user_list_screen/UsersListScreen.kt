@@ -1,5 +1,6 @@
 package com.example.gitusersclient.presentation.ui.user_list_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,11 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppToolBar
 import com.example.design_system.AppToolBarUiModel
 import com.example.design_system.FullScreenProgressView
+import com.example.design_system.SimpleAlertDialog
 import com.example.design_system.theme.X_SMALL_SPACE
 import java.util.UUID
 
@@ -27,11 +30,12 @@ import java.util.UUID
 fun UsersListScreen(
     modifier: Modifier = Modifier,
     viewState: UsersListViewState,
-    onPullDownToRefreshClicked: () -> Unit,
     onLastItemListScrolled: () -> Unit,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
     onUserListItemClicked: (userLogin: String) -> Unit,
-) {
 
+) {
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -51,6 +55,14 @@ fun UsersListScreen(
             )
         }
     )
+
+    SimpleAlertDialog(
+        show = viewState.errorAlertDialogUiModel.isShown,
+        dialogMessage = viewState.errorAlertDialogUiModel.message,
+        onDismiss = onDismiss,
+        onConfirm = onConfirm
+    )
+
 
     FullScreenProgressView(isVisible = viewState.isLoading)
 }
@@ -83,7 +95,9 @@ fun UsersListContent(
                     })
                 item {
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = X_SMALL_SPACE),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = X_SMALL_SPACE),
                         horizontalArrangement = Arrangement.Center
                     ) {
                         CircularProgressIndicator(
@@ -95,8 +109,6 @@ fun UsersListContent(
                 }
             }
         }
-
-
     }
 }
 
@@ -132,9 +144,10 @@ fun UsersListScreenPreview() {
                 )
             )
         ),
-        onUserListItemClicked = { },
-        onPullDownToRefreshClicked = {},
-        onLastItemListScrolled = {}
+        onUserListItemClicked = {},
+        onLastItemListScrolled = {},
+        onConfirm = {},
+        onDismiss = {}
 
     )
 }
@@ -147,9 +160,9 @@ fun EmptyUsersListScreenPreview() {
             isLoading = false,
             usersList = emptyList()
         ),
-        onUserListItemClicked = { },
-        onPullDownToRefreshClicked = {},
-                onLastItemListScrolled = {}
-
+        onUserListItemClicked = {},
+        onLastItemListScrolled = {},
+        onConfirm = {},
+        onDismiss = {}
     )
 }

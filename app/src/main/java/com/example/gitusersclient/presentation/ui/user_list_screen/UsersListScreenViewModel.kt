@@ -12,11 +12,16 @@ class UsersListScreenViewModel(
     private val repository: IRepository
 ) : BaseViewModel<UsersListScreenEvent, UsersListViewState>() {
 
+    init {
+        doOnInitialize()
+    }
+
     override fun handleEvent(event: UsersListScreenEvent) {
         when (event) {
             UsersListScreenEvent.InitializeEvent -> doOnInitialize()
-            UsersListScreenEvent.PullDownToRefreshEvent -> doOnPullDownToRefresh()
-            UsersListScreenEvent.LastItemListScrolledEvent -> getNextPage()
+            UsersListScreenEvent.LastItemListScrolledEvent -> doOnLastItemScrolled()
+            UsersListScreenEvent.AlertDialogEvent.ConfirmEvent -> onDialogConfirm()
+            UsersListScreenEvent.AlertDialogEvent.DismissEvent -> onDialogDismiss()
         }
     }
 
@@ -26,12 +31,16 @@ class UsersListScreenViewModel(
 
     }
 
-    private fun getUsersListByPage(pageNumber: Int, isRefresh: Boolean = false) {
+    private fun getUsersListByPage(pageNumber: Int) {
         viewModelScope.launch {
 
             when (val data = repository.getUsersList(pageNumber)) {
                 is DataResult.Error -> {
-                    // show error state
+                    hideProgress()
+
+                    data.errorBody.message?.let {
+                        onOpenAlertDialog(it)
+                    }
                 }
 
                 is DataResult.Success -> {
@@ -71,13 +80,39 @@ class UsersListScreenViewModel(
         return actualList
     }
 
-    private fun getNextPage() {
+    private fun doOnLastItemScrolled() {
         getUsersListByPage(viewState.value.lastUserId)
     }
 
-    private fun doOnPullDownToRefresh() {
-        getUsersListByPage(1)
+    private fun onOpenAlertDialog(errorMessage: String) {
+        setState {
+            copy(
+                errorAlertDialogUiModel = this.errorAlertDialogUiModel.copy(
+                    isShown = true,
+                    message = errorMessage
+                )
+            )
+        }
+    }
 
+    private fun onDialogConfirm() {
+        setState {
+            copy(
+                errorAlertDialogUiModel = this.errorAlertDialogUiModel.copy(
+                    isShown = false
+                )
+            )
+        }
+    }
+
+    private fun onDialogDismiss() {
+        setState {
+            copy(
+                errorAlertDialogUiModel = this.errorAlertDialogUiModel.copy(
+                    isShown = false
+                )
+            )
+        }
     }
 
     private fun showProgress() {
