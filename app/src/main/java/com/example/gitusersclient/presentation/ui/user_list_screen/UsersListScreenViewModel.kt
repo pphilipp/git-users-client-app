@@ -28,7 +28,6 @@ class UsersListScreenViewModel(
     private fun doOnInitialize() {
         showProgress()
         getUsersListByPage(1)
-
     }
 
     private fun getUsersListByPage(pageNumber: Int) {

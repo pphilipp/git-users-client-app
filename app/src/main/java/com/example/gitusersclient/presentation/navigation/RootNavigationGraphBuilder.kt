@@ -67,6 +67,9 @@ fun NavGraphBuilder.usersDetailsScreenRoute(
 
         UserDetailsScreen(
             viewState = viewState,
+            onBackPressed = {
+                navController.popBackStack()
+            }
         )
     }
 }

@@ -34,6 +34,7 @@ import com.example.gitusersclient.R
 fun UserDetailsScreen(
     modifier: Modifier = Modifier,
     viewState: UserDetailsScreenViewState,
+    onBackPressed: () -> Unit
 ) {
     Scaffold(
         modifier = modifier,
@@ -42,7 +43,8 @@ fun UserDetailsScreen(
                 useDarkTheme = true,
                 toolBarUiModel = AppToolBarUiModel(
                     title = viewState.userDetailsUiModel.login
-                )
+                ),
+                onBackPressed = onBackPressed
             )
         },
         content = {
@@ -152,6 +154,7 @@ fun UserDetailsScreenPreview() {
                 location = "location",
                 bio = "boi boi boi boi boi boi boi boi boi boi boi boi "
             )
-        )
+        ),
+        onBackPressed = {}
     )
 }
