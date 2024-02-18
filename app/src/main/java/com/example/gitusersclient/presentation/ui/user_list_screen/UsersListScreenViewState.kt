@@ -10,5 +10,7 @@ data class UsersListViewState(
 
 data class UserListItemUiModel(
     val id: Int,
-    val login: String
+    val login: String,
+    val avatarUrl: String,
+    val type: String
 )

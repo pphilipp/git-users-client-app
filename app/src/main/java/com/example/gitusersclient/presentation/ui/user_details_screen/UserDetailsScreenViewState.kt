@@ -4,5 +4,15 @@ import com.example.core.abstraction.presentation.base.ViewState
 
 data class UserDetailsScreenViewState(
     val isLoading: Boolean = false,
-    val userName: String = ""
+    val userDetailsUiModel: UserDetailsUiModel = UserDetailsUiModel()
 ) : ViewState
+
+data class UserDetailsUiModel(
+    val id: Int = -1,
+    val login: String = "",
+    val name: String = "",
+    val avatarUrl: String = "",
+    val company: String = "",
+    val location: String = "",
+    val bio: String = "",
+)

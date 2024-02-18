@@ -9,6 +9,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
@@ -37,6 +38,7 @@ fun AppToolBar(
     )
 
     TopAppBar(
+        modifier = modifier.shadow(elevation),
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = toolBarUiModel?.toolbarColor ?: Color.Gray,
         ),
@@ -52,7 +54,7 @@ fun AppToolBar(
             onBackPressed?.let {
                 IconButton(
                     onClick = it,
-                    modifier = modifier
+                    modifier = Modifier
                         .semantics { contentDescription = "Press back" }
                 ) {
                     Icon(

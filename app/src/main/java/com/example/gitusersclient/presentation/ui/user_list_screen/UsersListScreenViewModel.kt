@@ -42,6 +42,8 @@ class UsersListScreenViewModel(
                                 UserListItemUiModel(
                                     id = (userBM as UserBM).id,
                                     login = userBM.login,
+                                    avatarUrl = userBM.avatarUrl,
+                                    type = userBM.type
                                 )
                             },
                             lastUserId = (data.data.last() as UserBM).id

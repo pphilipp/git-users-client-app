@@ -93,11 +93,15 @@ fun UsersListScreenPreview() {
             usersList = listOf(
                 UserListItemUiModel(
                     id = UUID.randomUUID().variant(),
-                    login = "user first"
+                    login = "user first",
+                    avatarUrl = "",
+                    type = ""
                 ),
                 UserListItemUiModel(
                     id = UUID.randomUUID().variant(),
-                    login = "user second"
+                    login = "user second",
+                    avatarUrl = "",
+                    type = ""
                 )
             )
         ),
