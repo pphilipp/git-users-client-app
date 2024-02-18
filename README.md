@@ -13,11 +13,12 @@ Master-details Demo app based on git API.
 # followed functional requirements:
 - Config changes:
   - screen rotation
-  - Dark/light theme
+  - dark/light theme
 - error handling
   - general error handling
   - no internet connection handling
-- 
+- pagination
+
 
 # tools and libs :
 - UI Compose
